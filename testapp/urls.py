@@ -1,0 +1,10 @@
+from django.urls import path
+from testapp.apps import TestappConfig
+from . import views
+
+app_name = TestappConfig.name
+
+urlpatterns = [
+    path('', views.home, name="home"), # главная страницая
+    path('contacts/', views.feedback, name="contacts"),  # корректное имя
+]
