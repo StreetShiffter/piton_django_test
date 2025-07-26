@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница писателя</title>
+</head>
+<body>
+    <h1>Детали писателя</h1>
+    <p>Имя: {{ author.first_name }}</p>
+    <p>Фамилия: {{ author.last_name }}</p>
+    <p>Книга часть: {{ book.get_year_display }}</p>
+    <p>Фотография: <img src="{{ author.photo.url }}" alt="{{ book.title }}"></p>
+</body>
+</html>

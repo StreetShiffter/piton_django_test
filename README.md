@@ -10,6 +10,8 @@
 
 # 🔧 Установка компонентов:
 
+admin=gordievsky.andrey@yandex.ru=12345
+
 
 1. Создайте проект и установите poetry:
 
@@ -80,3 +82,11 @@ HW_22_Django/
 # 📝 Документация 
 
 Для получения дополнительной информации обратитесь к [документации](https://api.hh.ru/openapi/redoc#section)
+
+
+создание фикстур:
+python -Xutf8 manage.py dumpdata catalog.Products catalog.Category --output general_fixture.json --indent 4  - общие
+python -Xutf8 manage.py dumpdata catalog.Products --output products_fixture.json --indent 4 - конкретное
+python manage.py loaddata products_fixture_load.json --database=default --ignorenonexistent  -
+    загрузка с указанием БД из файла settings и указание игнорирования несуществующих полей
+

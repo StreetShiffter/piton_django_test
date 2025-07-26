@@ -1,0 +1,32 @@
+[
+{
+    "model": "testapp.book",
+    "pk": 1,
+    "fields": {
+        "title": "Камасутра по-джуновски",
+        "publication_date": "2025-07-20",
+        "authors": 1,
+        "year": "third"
+    }
+},
+{
+    "model": "testapp.book",
+    "pk": 2,
+    "fields": {
+        "title": "Война и мир",
+        "publication_date": "1869-01-01",
+        "authors": 2,
+        "year": "first"
+    }
+},
+{
+    "model": "testapp.book",
+    "pk": 3,
+    "fields": {
+        "title": "Гнилой унитаз",
+        "publication_date": "2024-01-01",
+        "authors": 3,
+        "year": "first"
+    }
+}
+]

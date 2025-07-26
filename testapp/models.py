@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Описываем структуру таблиц и создаем миграцию python manage.py makemigrations testapp
 
 class Author(models.Model):
     first_name = models.CharField(max_length=150,verbose_name='Имя')

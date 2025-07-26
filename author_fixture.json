@@ -1,0 +1,29 @@
+[
+{
+    "model": "testapp.author",
+    "pk": 1,
+    "fields": {
+        "first_name": "Вася",
+        "last_name": "Пупкин",
+        "birth_date": "1987-10-20"
+    }
+},
+{
+    "model": "testapp.author",
+    "pk": 2,
+    "fields": {
+        "first_name": "Лев",
+        "last_name": "Толстой",
+        "birth_date": "1828-09-09"
+    }
+},
+{
+    "model": "testapp.author",
+    "pk": 3,
+    "fields": {
+        "first_name": "Паша",
+        "last_name": "Жидкий",
+        "birth_date": "1988-07-04"
+    }
+}
+]
