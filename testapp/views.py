@@ -5,7 +5,8 @@ from .models import Author, Book
 #Простой контроллер, отображающий страницу
 def home(request):
     '''Загрузка стартовой страницы'''
-    return render(request, 'home.html')
+    authors = Author.objects.all()
+    return render(request, 'home.html', {'authors': authors})
 
 #Контроллер динамический - может возвращать данные из БД или собственные
 def teach(request):

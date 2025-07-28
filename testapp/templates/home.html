@@ -47,35 +47,19 @@
             <p class="d-flex justify-content-center">Добро пожаловать, приятных покупок!</p>
             <div class="row">
                 <!-- Карточка товара -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Товар 1</h5>
-                            <h2>$100</h2>
-                            <p>10 users included, 2 GB of storage,<br>Email support, Help center access</p>
-                            <button class="btn btn-danger w-50">Купить</button>
+            <div class="row">
+                {% for author in authors %} <!-- Запуск перебора контекста контроллера -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ author }}</h5><!-- достаем актора -->
+                                    <h2>{{author.birth_date |date:"d M Y"}}</h2><!-- Достаем его дату рождения и фильтруем порядок даты-->
+                                    <p>10 users included, 2 GB of storage,<br>Email support, Help center access</p>
+                                    <button class="btn btn-danger w-50">Купить</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Товар 1</h5>
-                            <h2>$100</h2>
-                            <p>10 users included, 2 GB of storage,<br>Email support, Help center access</p>
-                            <button class="btn btn-danger w-50">Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Товар 1</h5>
-                            <h2>$100</h2>
-                            <p>10 users included, 2 GB of storage,<br>Email support, Help center access</p>
-                            <button class="btn btn-danger w-50">Купить</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
