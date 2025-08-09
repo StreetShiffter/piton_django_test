@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Описываем структуру таблиц и создаем миграцию python manage.py makemigrations testapp
 
 class Author(models.Model):
@@ -44,3 +45,6 @@ class Book(models.Model):
         verbose_name = 'книга'
         verbose_name_plural = 'книги'
         ordering = ['title']
+
+
+

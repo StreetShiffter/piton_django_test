@@ -70,7 +70,7 @@ class AuthorDetailView(DetailView):
 class AuthorCreateView(CreateView):
     model = Author
     template_name = 'authors/author_form.html'
-    fields = ['first_name', 'last_name', 'birth_date']  # Поля формы (или используй form_class)
+    fields = ['first_name', 'last_name', 'birth_date']  # Поля формы (или используй form_class = AuthorForm)
     # form_class = AuthorForm  # Альтернатива: кастомная форма
     success_url = reverse_lazy('author-list')  # Куда перейти после успешного сохранения
 
@@ -238,12 +238,21 @@ class HomePageView(TemplateView):
     #     print("Пользователь открыл главную страницу")
     #     return super().get(request, *args, **kwargs)
 
+#В файле forms.py определяются модели
+# === 12. ContactForm — Пример формы для FormView (не привязана к модели) - основа для 13===
+from django.core.validators import MinLengthValidator
 
-# === 12. ContactForm — Пример формы для FormView (не привязана к модели) ===
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100, label='Ваше имя')
-    email = forms.EmailField(label='Email')
-    message = forms.CharField(widget=forms.Textarea, label='Сообщение')
+#validators - список дополнительных валидаторов, которые будут использоваться для проверки значения поля.
+#В примере указана минимальная длина сообщения - не менее 2 слов
+    name = forms.CharField(max_length=100, label='Ваше имя', validators=[MinLengthValidator(2)])#label - имя поля
+    email = forms.EmailField(label='Email', required=False)#required - является ли поле обязательным
+
+    message = forms.CharField(widget=forms.Textarea,# ← делаем из CharField многострочное поле
+#В HTML будет как <textarea name="content" ...></textarea>
+                              label='Сообщение',
+                              initial= "Введите ваше сообщение",#initial - сообщение по умолчанию
+                              text_help ="Введите не более 100 слов")#text_help -сообщение-подсказка
 
     # Можно добавить кастомную валидацию
     # def clean_message(self):
@@ -331,6 +340,63 @@ class RedirectToHomeView(RedirectView):
     #     response = super().get(request, *args, **kwargs)
     #     # Можно записать лог или событие
     #     return response
+
+# === 16. AuthorCreateWithFormView — CreateView с ModelForm ===
+class AuthorCreateWithFormView(CreateView):
+    model = Author
+    form_class = AuthorForm  # Указываем кастомную ModelForm
+    template_name = 'authors/author_form.html'  # Шаблон
+    success_url = reverse_lazy('author-list')  # Куда перейти после сохранения
+
+    # Метод get_context_data — добавляем заголовок
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Создать нового автора'
+    #     return context
+
+    # Метод form_valid — вызывается при валидной форме
+    # def form_valid(self, form):
+    #     # Можно добавить действия перед сохранением
+    #     print(f"Создаём автора: {form.cleaned_data['first_name']} {form.cleaned_data['last_name']}")
+    #     return super().form_valid(form)
+
+    # Метод form_invalid — при ошибках
+    # def form_invalid(self, form):
+    #     print("Форма содержит ошибки:", form.errors)
+    #     return super().form_invalid(form)
+
+
+# === 17. AuthorUpdateWithFormView — UpdateView с ModelForm ===
+class AuthorUpdateWithFormView(UpdateView):
+    model = Author
+    form_class = AuthorForm
+    template_name = 'authors/author_form.html'
+    context_object_name = 'author'
+
+    # Метод get_success_url — динамическое перенаправление
+    # def get_success_url(self):
+    #     return reverse_lazy('author-detail', kwargs={'pk': self.object.pk})
+
+    # Метод get_object — можно ограничить доступ
+    # def get_object(self, queryset=None):
+    #     obj = super().get_object(queryset)
+    #     if obj.birth_date.year < 1900:
+    #         raise PermissionDenied("Нельзя редактировать старых авторов.")
+    #     return obj
+
+
+# === 18. BookCreateWithFormView — Создание книги с ModelForm ===
+class BookCreateWithFormView(CreateView):
+    model = Book
+    form_class = BookForm
+    template_name = 'books/book_form.html'
+    success_url = reverse_lazy('book-list')
+
+    # Метод form_valid — можно модифицировать объект перед сохранением
+    # def form_valid(self, form):
+    #     # Например, пометим, кто добавил книгу (если есть пользователь)
+    #     # form.instance.added_by = self.request.user
+    #     return super().form_valid(form)
 
 #============================================ URLS ==================================================
 from django.urls import path
