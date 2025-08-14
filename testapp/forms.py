@@ -31,7 +31,7 @@ class AuthorForm(forms.ModelForm):
         }
 
     # Кастомная валидация: проверим, что дата рождения не в будущем
-    def clean_birth_date(self):
+    def clean_birth_date(self):# пишется как clean_ИМЯ ПОЛЯ
         birth_date = self.cleaned_data.get('birth_date')
         from django.utils import timezone
         if birth_date and birth_date > timezone.now().date():
@@ -69,7 +69,7 @@ class BookForm(forms.ModelForm):
         }
 
     # Добавим проверку: дата публикации не может быть позже сегодня
-    def clean_publication_date(self):
+    def clean_publication_date(self):# пишется как clean_ИМЯ ПОЛЯ
         pub_date = self.cleaned_data.get('publication_date')
         from django.utils import timezone
         if pub_date and pub_date > timezone.now().date():
