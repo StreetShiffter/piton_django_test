@@ -83,3 +83,27 @@ class BookForm(forms.ModelForm):
         self.fields['authors'].queryset = Author.objects.all().order_by('last_name')
         # Пример: фильтр по возрасту (авторы старше 18)
         # self.fields['authors'].queryset = Author.objects.filter(birth_date__lte=some_date)
+#Тестовый шаблон(все шаблоны идут по пути templates/ИМЯ ПРИЛОЖЕНИЯ/шаблон)
+# <!DOCTYPE html>
+# <html lang="ru">
+# <head>
+#     <meta charset="UTF-8">
+#     <title>Добавить книгу</title>
+# </head>
+# <body>
+#     <h2>Добавить книгу</h2>
+#     <form method="post">
+#         {% csrf_token %}
+
+#         <!-- Общие ошибки формы (например, из метода clean()) -->
+#         {{ form.non_field_errors }}
+
+#         <!-- Все поля формы с их ошибками (каждое поле в <p>) -->
+#         {{ form.as_p }}
+
+#         <button type="submit">Сохранить</button>
+#     </form>
+
+#     <a href="{% url 'book-list' %}">← Назад к списку</a>
+# </body>
+# </html>
